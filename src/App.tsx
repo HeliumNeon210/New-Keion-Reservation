@@ -193,21 +193,21 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900 font-sans">
+    <div className="min-h-screen bg-stone-100 text-stone-900 font-sans">
       {/* Header */}
-      <header className="bg-indigo-700 text-white p-4 shadow-sm sticky top-0 z-30">
+      <header className="bg-stone-800 text-stone-100 p-4 shadow-sm sticky top-0 z-30 border-b border-stone-700">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <div 
             className="flex items-center gap-3 cursor-pointer select-none"
             onClick={() => setLogoTapCount(prev => prev + 1)}
           >
-            <div className="bg-white/15 p-2 rounded-md">
+            <div className="bg-white/10 p-2 rounded-md">
               <Music className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="font-bold text-lg leading-tight">軽音班予約</h1>
+              <h1 className="font-semibold text-lg leading-tight">軽音班予約</h1>
               <div className="flex items-center gap-1.5 text-xs opacity-85">
-                <span className="w-1.5 h-1.5 bg-emerald-300 rounded-full flex-none aspect-square" />
+                <span className="w-1.5 h-1.5 bg-stone-300 rounded-full flex-none aspect-square" />
                 稼働中
               </div>
             </div>
@@ -224,7 +224,7 @@ export default function App() {
             {isAdmin && (
               <button 
                 onClick={() => setIsAdmin(false)}
-                className="px-4 py-1.5 bg-rose-500 hover:bg-rose-600 text-white rounded-md text-sm font-semibold transition-colors flex items-center gap-1"
+                className="px-4 py-1.5 bg-stone-600 hover:bg-stone-700 text-white rounded-md text-sm font-semibold transition-colors flex items-center gap-1"
               >
                 <X className="w-4 h-4" />
                 EXIT
@@ -236,26 +236,25 @@ export default function App() {
 
       <main className="max-w-5xl mx-auto p-4 md:p-6">
         {/* Calendar Navigation */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-5 flex items-center justify-between">
-          <button onClick={handlePrevMonth} className="p-2 hover:bg-slate-100 rounded-md transition-colors">
+        <div className="bg-white rounded-xl shadow-sm border border-stone-300 p-5 mb-5 flex items-center justify-between">
+          <button onClick={handlePrevMonth} className="p-2 hover:bg-stone-100 rounded-md transition-colors">
             <ChevronLeft className="w-6 h-6" />
           </button>
           <h2 className="text-2xl font-semibold">
             {format(currentDate, 'yyyy年 M月', { locale: ja })}
           </h2>
-          <button onClick={handleNextMonth} className="p-2 hover:bg-slate-100 rounded-md transition-colors">
+          <button onClick={handleNextMonth} className="p-2 hover:bg-stone-100 rounded-md transition-colors">
             <ChevronRight className="w-6 h-6" />
           </button>
         </div>
 
         {/* Calendar Grid */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-          <div className="grid grid-cols-7 border-b border-slate-100">
+        <div className="bg-white rounded-xl shadow-sm border border-stone-300 overflow-hidden">
+          <div className="grid grid-cols-7 border-b border-stone-200">
             {['日', '月', '火', '水', '木', '金', '土'].map((day, i) => (
               <div key={day} className={cn(
-                "py-3 text-center text-sm font-semibold text-slate-500",
-                i === 0 && "text-rose-500",
-                i === 6 && "text-sky-500"
+                "py-3 text-center text-sm font-medium text-stone-600",
+                (i === 0 || i === 6) && "text-stone-700"
               )}>
                 {day}
               </div>
@@ -272,26 +271,26 @@ export default function App() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-7 bg-white rounded-xl shadow-sm border border-amber-200 p-5"
+            className="mt-7 bg-white rounded-xl shadow-sm border border-stone-300 p-5"
           >
-            <div className="flex items-center gap-2 mb-5 text-amber-700">
+            <div className="flex items-center gap-2 mb-5 text-stone-700">
               <Settings className="w-6 h-6" />
               <h3 className="text-xl font-bold">週間スケジュールの管理</h3>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4">
               {[0, 1, 2, 3, 4, 5, 6].map(day => (
-                <div key={day} className="p-3 bg-slate-50 rounded-lg border border-slate-200 flex flex-col">
-                  <h4 className="font-semibold mb-3 text-slate-700 text-center">
+                <div key={day} className="p-3 bg-stone-50 rounded-lg border border-stone-200 flex flex-col">
+                  <h4 className="font-semibold mb-3 text-stone-700 text-center">
                     {['日', '月', '火', '水', '木', '金', '土'][day]}曜日
                   </h4>
                   <div className="space-y-2 flex-grow">
                     {slotData.recurring.filter(s => s.dayOfWeek === day).sort((a,b) => a.startTime.localeCompare(b.startTime)).map(slot => (
-                      <div key={slot.id} className="flex items-center justify-between bg-white px-3 py-2 rounded-md border border-slate-200">
-                        <span className="text-sm font-semibold text-indigo-700">{slot.startTime}</span>
+                      <div key={slot.id} className="flex items-center justify-between bg-white px-3 py-2 rounded-md border border-stone-300">
+                        <span className="text-sm font-semibold text-stone-800">{slot.startTime}</span>
                         <button 
                           onClick={() => handleDeleteAvailableSlot(slot.id)}
-                          className="text-rose-500 hover:bg-rose-50 p-1 rounded-md transition-colors"
+                          className="text-stone-500 hover:bg-stone-100 p-1 rounded-md transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -301,12 +300,12 @@ export default function App() {
                   
                   <div className="mt-3">
                     {addingSlotDay === day ? (
-                      <div className="flex flex-col gap-2 p-2 bg-white rounded-md border border-amber-200">
+                      <div className="flex flex-col gap-2 p-2 bg-white rounded-md border border-stone-300">
                         <input 
                           type="time" 
                           value={newSlotTime}
                           onChange={(e) => setNewSlotTime(e.target.value)}
-                          className="w-full px-2 py-1 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
+                          className="w-full px-2 py-1 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
                           autoFocus
                         />
                         <div className="flex gap-1">
@@ -318,7 +317,7 @@ export default function App() {
                                 setNewSlotTime('');
                               }
                             }}
-                            className="flex-1 py-1 bg-amber-500 text-white text-xs font-semibold rounded-md hover:bg-amber-600 transition-colors"
+                            className="flex-1 py-1 bg-stone-700 text-white text-xs font-semibold rounded-md hover:bg-stone-800 transition-colors"
                           >
                             追加
                           </button>
@@ -327,7 +326,7 @@ export default function App() {
                               setAddingSlotDay(null);
                               setNewSlotTime('');
                             }}
-                            className="px-2 py-1 bg-slate-100 text-slate-500 text-xs font-semibold rounded-md hover:bg-slate-200 transition-colors"
+                            className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-semibold rounded-md hover:bg-stone-200 transition-colors"
                           >
                             ×
                           </button>
@@ -339,7 +338,7 @@ export default function App() {
                           setAddingSlotDay(day);
                           setNewSlotTime('16:00');
                         }}
-                        className="w-full py-2 border border-dashed border-slate-300 rounded-md text-slate-500 hover:border-amber-400 hover:text-amber-600 transition-colors flex items-center justify-center gap-1 text-sm font-semibold"
+                        className="w-full py-2 border border-dashed border-stone-300 rounded-md text-stone-600 hover:border-stone-500 hover:text-stone-800 transition-colors flex items-center justify-center gap-1 text-sm font-semibold"
                       >
                         <Plus className="w-4 h-4" /> 追加
                       </button>
@@ -404,14 +403,14 @@ function renderCalendarDays(
         key={day.toString()}
         onClick={() => onDayClick(day)}
         className={cn(
-          "min-h-[120px] p-2 border-r border-b border-slate-100 relative cursor-pointer transition-colors hover:bg-slate-50 group",
-          !isCurrentMonth && "bg-slate-50/50 opacity-30"
+          "min-h-[120px] p-2 border-r border-b border-stone-200 relative cursor-pointer transition-colors hover:bg-stone-50 group",
+          !isCurrentMonth && "bg-stone-50/70 opacity-40"
         )}
       >
         <div className="flex justify-between items-start mb-1">
           <span className={cn(
             "text-sm font-semibold w-7 h-7 flex items-center justify-center rounded-md transition-colors flex-none aspect-square",
-            isToday ? "bg-indigo-700 text-white" : "text-slate-500 group-hover:text-slate-700"
+            isToday ? "bg-stone-800 text-white" : "text-stone-600 group-hover:text-stone-800"
           )}>
             {format(day, 'd')}
           </span>
@@ -419,8 +418,8 @@ function renderCalendarDays(
             <div className={cn(
               "w-1.5 h-1.5 rounded-full flex-none aspect-square",
               slotData.extra.some(s => s.date === formattedDate)
-                ? "bg-amber-500"
-                : "bg-emerald-500"
+                ? "bg-stone-500"
+                : "bg-stone-400"
             )} />
           )}
         </div>
@@ -429,7 +428,7 @@ function renderCalendarDays(
           {dayReservations.sort((a, b) => a.startTime.localeCompare(b.startTime)).map(res => (
             <div 
               key={res.id} 
-              className="text-[10px] leading-tight bg-indigo-50 text-indigo-800 p-1.5 rounded-md border border-indigo-100 truncate font-medium"
+              className="text-[10px] leading-tight bg-stone-100 text-stone-800 p-1.5 rounded-md border border-stone-200 truncate font-medium"
             >
               <span className="opacity-60 mr-1">{res.startTime}</span>
               {res.bandName}
@@ -551,7 +550,7 @@ function ReservationModal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="absolute inset-0 bg-slate-900/45"
+        className="absolute inset-0 bg-stone-900/50"
       />
       <motion.div 
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -565,31 +564,31 @@ function ReservationModal({
               <h3 className="text-2xl font-semibold mb-1">
                 {format(date, 'M月d日 (E)', { locale: ja })}
               </h3>
-              <p className="text-slate-500 text-sm">講堂の予約・管理</p>
+              <p className="text-stone-500 text-sm">講堂の予約・管理</p>
             </div>
-            <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-md transition-colors">
-              <X className="w-6 h-6 text-slate-400" />
+            <button onClick={onClose} className="p-2 hover:bg-stone-100 rounded-md transition-colors">
+              <X className="w-6 h-6 text-stone-500" />
             </button>
           </div>
 
           <div className="space-y-8">
             {/* Admin: Manage slots for this day */}
             {isAdmin && (
-              <div className="bg-amber-50 p-4 rounded-lg border border-amber-100">
-                <h4 className="text-xs font-semibold text-amber-700 mb-3">臨時枠の管理（この日のみ）</h4>
+              <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                <h4 className="text-xs font-semibold text-stone-700 mb-3">臨時枠の管理（この日のみ）</h4>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {actualSlots.map(time => (
-                    <div key={time} className="flex items-center gap-1 bg-white px-2 py-1 rounded-md border border-amber-200 text-xs font-semibold">
+                    <div key={time} className="flex items-center gap-1 bg-white px-2 py-1 rounded-md border border-stone-300 text-xs font-semibold">
                       {time}
-                      <button onClick={() => handleAdminRemoveSlot(time)} className="text-rose-500 hover:bg-rose-50 rounded p-0.5" title="この日だけ削除">
+                      <button onClick={() => handleAdminRemoveSlot(time)} className="text-stone-500 hover:bg-stone-100 rounded p-0.5" title="この日だけ削除">
                         <Trash2 className="w-3 h-3" />
                       </button>
                     </div>
                   ))}
                   {blockedTimes.map(time => (
-                    <div key={time} className="flex items-center gap-1 bg-slate-100 px-2 py-1 rounded-md border border-slate-200 text-xs font-semibold text-slate-400 line-through">
+                    <div key={time} className="flex items-center gap-1 bg-stone-100 px-2 py-1 rounded-md border border-stone-300 text-xs font-semibold text-stone-500 line-through">
                       {time}
-                      <button onClick={() => handleAdminRestoreSlot(time)} className="text-emerald-500 hover:bg-emerald-50 rounded p-0.5" title="枠を復元">
+                      <button onClick={() => handleAdminRestoreSlot(time)} className="text-stone-700 hover:bg-stone-200 rounded p-0.5" title="枠を復元">
                         <Plus className="w-3 h-3" />
                       </button>
                     </div>
@@ -597,23 +596,23 @@ function ReservationModal({
                 </div>
                 
                 {isAddingExtra ? (
-                  <div className="flex gap-2 bg-white p-2 rounded-md border border-amber-200">
+                  <div className="flex gap-2 bg-white p-2 rounded-md border border-stone-300">
                     <input 
                       type="time" 
                       value={extraTime}
                       onChange={(e) => setExtraTime(e.target.value)}
-                      className="flex-1 px-2 py-1 text-xs border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
+                      className="flex-1 px-2 py-1 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
                       autoFocus
                     />
                     <button 
                       onClick={handleAdminAddSlot}
-                      className="px-3 py-1 bg-amber-500 text-white text-xs font-semibold rounded-md hover:bg-amber-600 transition-colors"
+                      className="px-3 py-1 bg-stone-700 text-white text-xs font-semibold rounded-md hover:bg-stone-800 transition-colors"
                     >
                       追加
                     </button>
                     <button 
                       onClick={() => setIsAddingExtra(false)}
-                      className="px-2 py-1 bg-slate-100 text-slate-500 text-xs font-semibold rounded-md hover:bg-slate-200 transition-colors"
+                      className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-semibold rounded-md hover:bg-stone-200 transition-colors"
                     >
                       ×
                     </button>
@@ -621,7 +620,7 @@ function ReservationModal({
                 ) : (
                   <button 
                     onClick={() => setIsAddingExtra(true)}
-                    className="w-full py-2 bg-white border border-amber-200 rounded-md text-amber-700 text-xs font-semibold hover:bg-amber-100 transition-colors flex items-center justify-center gap-1"
+                    className="w-full py-2 bg-white border border-stone-300 rounded-md text-stone-700 text-xs font-semibold hover:bg-stone-100 transition-colors flex items-center justify-center gap-1"
                   >
                     <Plus className="w-3 h-3" /> 臨時枠を追加
                   </button>
@@ -631,22 +630,22 @@ function ReservationModal({
 
             {/* Slots Status */}
             <div>
-              <h4 className="text-xs font-semibold text-slate-500 mb-4">予約状況</h4>
+              <h4 className="text-xs font-semibold text-stone-600 mb-4">予約状況</h4>
               {actualSlots.length > 0 ? (
                 <div className="space-y-3">
                   {actualSlots.sort().map(time => {
                     const res = reservations.find(r => r.startTime === time);
                     if (res) {
                       return (
-                        <div key={res.id} className="flex items-center justify-between bg-slate-50 p-4 rounded-lg border border-slate-200 group">
+                        <div key={res.id} className="flex items-center justify-between bg-stone-50 p-4 rounded-lg border border-stone-200 group">
                           <div className="flex items-center gap-4">
                             <div className="bg-white p-2 rounded-md">
-                              <Clock className="w-4 h-4 text-indigo-500" />
+                              <Clock className="w-4 h-4 text-stone-600" />
                             </div>
                             <div>
-                              <p className="font-semibold text-slate-700">{res.startTime}</p>
-                              <div className="flex items-center gap-3 text-sm text-slate-500">
-                                <span className="flex items-center gap-1 font-semibold text-indigo-700"><Music className="w-3 h-3" /> {res.bandName}</span>
+                              <p className="font-semibold text-stone-800">{res.startTime}</p>
+                              <div className="flex items-center gap-3 text-sm text-stone-600">
+                                <span className="flex items-center gap-1 font-semibold text-stone-800"><Music className="w-3 h-3" /> {res.bandName}</span>
                                 <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {res.memberCount}人</span>
                               </div>
                             </div>
@@ -664,12 +663,12 @@ function ReservationModal({
                             }}
                             className={cn(
                               "p-2 rounded-md transition-colors flex items-center justify-center",
-                              deletingId === res.id ? "text-slate-300" : "text-rose-500 hover:bg-rose-50"
+                              deletingId === res.id ? "text-stone-300" : "text-stone-500 hover:bg-stone-100"
                             )}
                             title="削除"
                           >
                             {deletingId === res.id ? (
-                              <div className="w-5 h-5 border-2 border-slate-300 border-t-slate-500 rounded-full animate-spin" />
+                              <div className="w-5 h-5 border-2 border-stone-300 border-t-stone-600 rounded-full animate-spin" />
                             ) : (
                               <Trash2 className="w-5 h-5" />
                             )}
@@ -678,19 +677,19 @@ function ReservationModal({
                       );
                     } else {
                       return (
-                        <div key={time} className="flex items-center justify-between bg-emerald-50/40 p-4 rounded-lg border border-emerald-200 border-dashed">
+                        <div key={time} className="flex items-center justify-between bg-stone-50 p-4 rounded-lg border border-stone-300 border-dashed">
                           <div className="flex items-center gap-4">
                             <div className="bg-white p-2 rounded-md">
-                              <Clock className="w-4 h-4 text-emerald-500" />
+                              <Clock className="w-4 h-4 text-stone-600" />
                             </div>
                             <div>
-                              <p className="font-semibold text-slate-700">{time}</p>
-                              <p className="text-xs font-semibold text-emerald-700">空き</p>
+                              <p className="font-semibold text-stone-800">{time}</p>
+                              <p className="text-xs font-semibold text-stone-600">空き</p>
                             </div>
                           </div>
                           <button 
                             onClick={() => setSelectedTime(time)}
-                            className="text-xs font-semibold text-indigo-700 hover:underline"
+                            className="text-xs font-semibold text-stone-800 hover:underline"
                           >
                             予約する
                           </button>
@@ -700,25 +699,25 @@ function ReservationModal({
                   })}
                 </div>
               ) : (
-                <div className="text-center py-8 bg-slate-50 rounded-lg border border-dashed border-slate-300">
-                  <p className="text-slate-400 text-sm font-medium">この日の枠はありません</p>
+                <div className="text-center py-8 bg-stone-50 rounded-lg border border-dashed border-stone-300">
+                  <p className="text-stone-500 text-sm font-medium">この日の枠はありません</p>
                 </div>
               )}
             </div>
 
             {/* New Reservation Form */}
             {actualSlots.length > 0 && (
-              <form onSubmit={handleSubmit} className="space-y-6 pt-6 border-t border-slate-200">
-                <h4 className="text-xs font-semibold text-slate-500">新規予約</h4>
+              <form onSubmit={handleSubmit} className="space-y-6 pt-6 border-t border-stone-200">
+                <h4 className="text-xs font-semibold text-stone-600">新規予約</h4>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-slate-700 block px-1">時間枠</label>
+                    <label className="text-sm font-semibold text-stone-800 block px-1">時間枠</label>
                     <select 
                       required
                       value={selectedTime}
                       onChange={(e) => setSelectedTime(e.target.value)}
-                      className="w-full bg-white border border-slate-300 rounded-md px-3 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-colors"
+                      className="w-full bg-white border border-stone-300 rounded-md px-3 py-2.5 text-sm focus:ring-2 focus:ring-stone-500 focus:border-transparent outline-none transition-colors"
                     >
                       <option value="">選択してください</option>
                       {actualSlots.map(time => {
@@ -733,12 +732,12 @@ function ReservationModal({
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-slate-700 block px-1">人数</label>
+                    <label className="text-sm font-semibold text-stone-800 block px-1">人数</label>
                     <select 
                       required
                       value={memberCount}
                       onChange={(e) => setMemberCount(parseInt(e.target.value))}
-                      className="w-full bg-white border border-slate-300 rounded-md px-3 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-colors"
+                      className="w-full bg-white border border-stone-300 rounded-md px-3 py-2.5 text-sm focus:ring-2 focus:ring-stone-500 focus:border-transparent outline-none transition-colors"
                     >
                       {[2,3,4,5,6,7,8,9,10].map(n => (
                         <option key={n} value={n}>{n}人</option>
@@ -748,27 +747,27 @@ function ReservationModal({
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700 block px-1">バンド名</label>
+                  <label className="text-sm font-semibold text-stone-800 block px-1">バンド名</label>
                   <input 
                     type="text"
                     placeholder="バンド名を入力"
                     required
                     value={bandName}
                     onChange={(e) => setBandName(e.target.value)}
-                    className="w-full bg-white border border-slate-300 rounded-md px-3 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-colors"
+                    className="w-full bg-white border border-stone-300 rounded-md px-3 py-2.5 text-sm focus:ring-2 focus:ring-stone-500 focus:border-transparent outline-none transition-colors"
                   />
                 </div>
 
                 <button 
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-indigo-700 text-white py-3 rounded-md font-semibold hover:bg-indigo-800 transition-colors disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2"
+                  className="w-full bg-stone-800 text-white py-3 rounded-md font-semibold hover:bg-stone-900 transition-colors disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Plus className="w-5 h-5" />}
                   予約を確定する
                 </button>
                 {showSuccessMessage && (
-                  <p className="text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-md px-4 py-3 text-center">
+                  <p className="text-sm font-semibold text-stone-700 bg-stone-100 border border-stone-300 rounded-md px-4 py-3 text-center">
                     予約されました
                   </p>
                 )}
