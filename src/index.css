@@ -6,6 +6,6 @@
 
 @layer base {
   body {
-    @apply antialiased bg-slate-100 text-slate-900;
+    @apply antialiased bg-stone-100 text-stone-900;
   }
 }
